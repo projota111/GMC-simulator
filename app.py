@@ -43,15 +43,15 @@ def sidebar_decisoes() -> dict:
     # ── Parâmetros de mercado (exógenos / actualizáveis) ─────────────────────
     with st.sidebar.expander("📈 Parâmetros de Mercado", expanded=False):
         d["taxa_bce_ue"]        = st.number_input("Taxa BCE (% a.a.)", 0.0, 10.0,
-                                                   e.get("taxa_bce_ue", 0.015)*100, 0.1) / 100
+                                                   float(e.get("taxa_bce_ue", 0.015))*100, 0.1) / 100
         d["taxa_cambio_eur_usd"] = st.number_input("Taxa Câmbio €/$", 0.50, 2.00,
-                                                    e.get("taxa_cambio_eur_usd", 0.73), 0.01)
+                                                    float(e.get("taxa_cambio_eur_usd", 0.73)), 0.01)
         d["preco_mp_spot_usd"]   = st.number_input("MP Spot ($/1000u)", 0.0, 500_000.0,
-                                                    e.get("preco_mp_spot_usd", 74_574.0), 100.0)
+                                                    float(e.get("preco_mp_spot_usd", 74_574.0)), 100.0)
         d["preco_mp_3m_usd"]     = st.number_input("MP 3M ($/1000u)", 0.0, 500_000.0,
-                                                    e.get("preco_mp_3m_usd", 73_402.0), 100.0)
+                                                    float(e.get("preco_mp_3m_usd", 73_402.0)), 100.0)
         d["preco_mp_6m_usd"]     = st.number_input("MP 6M ($/1000u)", 0.0, 500_000.0,
-                                                    e.get("preco_mp_6m_usd", 72_229.0), 100.0)
+                                                    float(e.get("preco_mp_6m_usd", 72_229.0)), 100.0)
 
     # ── Produção ─────────────────────────────────────────────────────────────
     with st.sidebar.expander("⚙️ Produção", expanded=True):
