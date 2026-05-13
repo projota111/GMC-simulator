@@ -281,12 +281,12 @@ def _mostrar_relatorio(r: dict):
         st.divider()
         st.subheader("⚠️ Alertas")
         for a in alertas:
-            if a.tipo == "erro":
-                st.error(f"🔴 {a.msg}")
-            elif a.tipo == "aviso":
-                st.warning(f"🟡 {a.msg}")
+            if a["tipo"] == "erro":
+                st.error(f"🔴 {a['msg']}")
+            elif a["tipo"] == "aviso":
+                st.warning(f"🟡 {a['msg']}")
             else:
-                st.info(f"🔵 {a.msg}")
+                st.info(f"🔵 {a['msg']}")
 
 
 def _mostrar_historico(hist: list[dict]):
@@ -403,6 +403,25 @@ def painel_controlo():
 def main():
     decisoes = sidebar_decisoes()
     painel_controlo()
+
+    # ── Guia rápido (só aparece antes da primeira simulação) ─────────────────
+    if not st.session_state.historico:
+        st.title("🏭 GMC Simulator")
+        st.info("""
+**Como usar esta app:**
+
+1. **Barra lateral (esquerda)** → introduz as tuas decisões para o trimestre:
+   - Turnos de produção, matéria-prima a comprar, unidades a produzir
+   - Preços e entregas por mercado (UE / NAFTA / Internet)
+   - Agentes, recursos humanos, publicidade, finanças
+
+2. **Validação prévia** (abaixo) → mostra erros antes de simular
+
+3. **Botão "Simular Trimestre"** → calcula o resultado e avança o trimestre
+
+4. **Dashboard** → mostra a Demonstração de Resultados, Balanço e produção
+        """)
+        st.divider()
 
     # Validação prévia
     erros = painel_validacao(decisoes)
